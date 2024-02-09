@@ -77,10 +77,10 @@ TCP personalizado	TCP	2049	0.0.0.0/0	NFS
 
 ## Configure a Montagem Automática:  
 
-1 - Utilize o arquivo /etc/fstab em um editor. (utilizei o Nano).
-2 - Para montar automaticamente um sistema de arquivos usando o NFS em vez do auxiliar de montagem do EFS, adicione a seguinte linha ao **/etc/fstab arquivo.  
-3 - file_system_id.efs.aws-region.amazonaws.com:/ mount_point nfs4 nfsvers=4.1,rsize=1048576wsize=1048576,hard,timeo=600,retrans=2,noresvport,_netdev 0 0**    
-4 - Utilize o comando **df -h** para confirmar se o sistema de arquivos EFS está montado corretamente usando.  
+1 - Utilize o arquivo /etc/fstab em um editor. (utilizei o Nano).  
+2 - Para montar automaticamente um sistema de arquivos usando o NFS em vez do auxiliar de montagem do EFS, adicione a seguinte linha ao **/etc/fstab arquivo.    
+  file_system_id.efs.aws-region.amazonaws.com:/ mount_point nfs4 nfsvers=4.1,rsize=1048576wsize=1048576,hard,timeo=600,retrans=2,noresvport,_netdev 0 0**  
+3 - Utilize o comando **df -h** para confirmar se o sistema de arquivos EFS está montado corretamente usando.   
 
 
 ## Configurando o servidor Apache.  
