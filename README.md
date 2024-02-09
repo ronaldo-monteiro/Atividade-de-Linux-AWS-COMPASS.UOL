@@ -29,7 +29,7 @@ Fazer a documentação explicando o processo de instalação do Linux.
 4 - Neste passo excolha um nome para a chave e finalize clicando em  "Criar par de chaves".  
 5 - Um arquivo contendo a chave será gerado. Não perca este arquivo!!! Sua extesão é (xxx.pem)    
 6 - Execute a instancia na opção "Executar instâncias".  
-7 - Preste atenção neste ponto! As Tags são tudo!!! (Name, Project e CostCenter) Sem as TAGS seu projeto trava! 
+7 - Preste atenção neste ponto! As Tags são tudo!!! (Name, Project e CostCenter) Sem as TAGS seu projeto trava!   
 8 - Como pedido no projeto, encontre a imagem Amazon Linux 2 AMI, SSD Volume Type.  
 9 - Instancia pedida no projeto t3.small.
 10 - Lembra da chave que gerou?! Você vai precisar dela agora!
