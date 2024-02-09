@@ -121,3 +121,16 @@ else
     MESSAGE="O serviço $SERVICE_NAME está offline."  
     OUTPUT_FILE="$EFS_MOUNT_PATH/status_offline.txt"  
 fi  
+
+
+Após saovar o script, execute o seguinte comando:  
+**chmod +x script.sh** para tornar o arquivo de script executável.  
+Execute o comando **./script.sh para executar o script**.  
+
+Este Script é executado com intervalo de 5 em 5 minutos.
+Digite o **comando crontab -e para editar o cronjob**.
+Adicione a seguinte linha de código no arquivo de cronjob:
+* */5 * * * * /caminho/do/script/check_service.sh*
+
+
+O projeto foi finalizado até aqui! 
