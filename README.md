@@ -42,47 +42,46 @@ Fazer a documentação explicando o processo de instalação do Linux.
 2 - Opção "Alocar endereço IP elástico".  
 3 - Utilize o ip alocado e "Associar endereço IP elástico".  
 4 - Selecionar a instância EC2 criada anteriormente e clicar em "Associar".  
-5 - Acessar a console, na pagina do serviço EC2, e clicar em "Segurança" > "Grupos de segurança" no menu lateral esquerdo.  
+5 - Acessar a console, na pagina do serviço EC2, e clicar em "Segurança" > "Grupos de segurança" no menu lateral esquerdo.    
 
-Selecione o grupo de segurança da instância EC2 criada anteriormente.  
+Selecione o grupo de segurança da instância EC2 criada anteriormente.    
 
-Edite as regras de entrada "Editar regras de entrada".  
+Edite as regras de entrada "Editar regras de entrada".      
 
-Configure as seguintes regras conforme a tabela:
+Configure as seguintes regras conforme a tabela:  
 
-Tipo	Protocolo	Intervalo de portas	Origem	Descrição
+Tipo	Protocolo	Intervalo de portas	Origem	Descrição  
 
-SSH	 TCP	22       MEU IP  0.0.0.0/0 SSH
-UDP personalizado	UDP	111	0.0.0.0/0	RPC
-UDP personalizado	UDP	2049	0.0.0.0/0	NFS
-TCP personalizado	TCP	80	0.0.0.0/0	HTTP
-TCP personalizado	TCP	443	0.0.0.0/0	HTTPS
-TCP personalizado	TCP	111	0.0.0.0/0	RPC
-TCP personalizado	TCP	2049	0.0.0.0/0	NFS
+SSH	 TCP	22       MEU IP  0.0.0.0/0 SSH  
+UDP personalizado	UDP	111	0.0.0.0/0	RPC  
+UDP personalizado	UDP	2049	0.0.0.0/0	NFS  
+TCP personalizado	TCP	80	0.0.0.0/0	HTTP  
+TCP personalizado	TCP	443	0.0.0.0/0	HTTPS  
+TCP personalizado	TCP	111	0.0.0.0/0	RPC  
+TCP personalizado	TCP	2049	0.0.0.0/0	NFS  
 
-##Configurando o Sistema de Arquivos AWS EFS na Instância EC2.
-Acesse o Console da AWS.
+## Sistema de Arquivos AWS EFS na Instância EC2.    
 
-Navegue até o Serviço EFS.
+1 - No Console da AWS.    
 
-Crie um Sistema de Arquivos EFS.
+2 - Encontre o Serviço EFS.    
 
-Configure as Opções:
+3 - Crie um Sistema de Arquivos EFS.
 
-Escolha a VPC (deve ser a mesma VPC da Instância EC2).
-Defina as opções de segurança de acesso, liberando a porta 2049/TCP
+4 - Econtre a VPC ( a mesma VPC da Instância EC2).  
+6 - Libere a porta 2049/TCP para acesso.  
 
-Crie o Ponto de Montagem na Instância EC2:
+## Crie o Ponto de Montagem na Instância EC2:  
 
-Vá para a instância EC2.
-Instale o pacote sudo yum install -y amazon-efs-utils para suporte NFS.
-Crie um diretório local que servirá como ponto de montagem.
-Obtenha as Informações de Montagem do EFS:
+1 - No console escolha, instância EC2.  
+2 - Instale o pacotecom o seguinte comando: sudo yum install -y amazon-efs-utils para suporte NFS.  
+3 - Crie um diretório local que servirá como ponto de montagem.  
+4 - Obtenha as Informações de Montagem do EFS:  
 
-Volte ao console do EFS e obtenha as informações de DNS do ponto de montagem.
-Monte o Sistema de Arquivos na Instância EC2:
+5 - Volte ao console do EFS e obtenha as informações de DNS do ponto de montagem.  
+6 - Monte o Sistema de Arquivos na Instância EC2:  
 
-Execute o comando de montagem na instância EC2 usando o cliente do NFS:
+7 -Execute o comando de montagem na instância EC2 usando o cliente do NFS:
 sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 <DNS do EFS>:/ /<caminho local>
 
 Configure a Montagem Automática:
