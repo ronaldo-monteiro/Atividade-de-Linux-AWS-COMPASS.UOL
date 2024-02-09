@@ -31,10 +31,10 @@ Fazer a documentação explicando o processo de instalação do Linux.
 6 - Execute a instancia na opção "Executar instâncias".  
 7 - Preste atenção neste ponto! As Tags são tudo!!! (Name, Project e CostCenter) Sem as TAGS seu projeto trava!   
 8 - Como pedido no projeto, encontre a imagem Amazon Linux 2 AMI, SSD Volume Type.  
-9 - Instancia pedida no projeto t3.small.
-10 - Lembra da chave que gerou?! Você vai precisar dela agora!
-12 - Utilize um SSD modelo gp2 com 16 GB dearmazenamento.
-13 - Ao final clique  em "Executar instância" (caso tudo tenha dado certo) finalizamos a primeira parte!
+9 - Instancia pedida no projeto t3.small.  
+10 - Lembra da chave que gerou?! Você vai precisar dela agora!  
+11 - Utilize um SSD modelo gp2 com 16 GB dearmazenamento.  
+12 - Ao final clique  em "Executar instância" (caso tudo tenha dado certo) finalizamos a primeira parte!  
 
 ## Anexar um  IP elástico à sua EC2.
 
@@ -62,50 +62,39 @@ TCP personalizado	TCP	2049	0.0.0.0/0	NFS
 
 ## Sistema de Arquivos AWS EFS na Instância EC2.    
 
-1 - No Console da AWS.    
-
+1 - No Console da AWS.  
 2 - Encontre o Serviço EFS.    
-
-3 - Crie um Sistema de Arquivos EFS.
-
-4 - Econtre a VPC ( a mesma VPC da Instância EC2).  
+3 - Crie um Sistema de Arquivos EFS.  
+4 - Econtre a VPC ( a mesma VPC da Instância EC2).      
 6 - Libere a porta 2049/TCP para acesso.  
 
 ## Crie o Ponto de Montagem na Instância EC2:  
 
-1 - No console escolha, instância EC2.  
-2 - Instale o pacotecom o seguinte comando: sudo yum install -y amazon-efs-utils para suporte NFS.  
-3 - Crie um diretório local que servirá como ponto de montagem.  
-4 - Obtenha as Informações de Montagem do EFS:  
-
-5 - Volte ao console do EFS e obtenha as informações de DNS do ponto de montagem.  
+1 - Na console escolha, instância EC2.  
+2 - Instale o pacote com o seguinte comando: **sudo yum install -y amazon-efs-utils para suporte NFS**.   
+3 - Criar um diretório local que servirá como ponto de montagem.  
+5 - Novamente no console do EFS e obtenha as informações de DNS do ponto de montagem.  
 6 - Monte o Sistema de Arquivos na Instância EC2:  
+7 -Utilize o comando para  montagem na instância EC2 usando o NFS:  
+**sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 <DNS do EFS>://<caminho local>**  
 
-7 -Execute o comando de montagem na instância EC2 usando o cliente do NFS:
-sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 <DNS do EFS>:/ /<caminho local>
+## Configure a Montagem Automática:  
 
-Configure a Montagem Automática:
+1 - Utilize o arquivo /etc/fstab em um editor. (utilizei o Nano).
+2 - Para montar automaticamente um sistema de arquivos usando o NFS em vez do auxiliar de montagem do EFS, adicione a seguinte linha ao **/etc/fstab arquivo.  
+3 - file_system_id.efs.aws-region.amazonaws.com:/ mount_point nfs4 nfsvers=4.1,rsize=1048576wsize=1048576,hard,timeo=600,retrans=2,noresvport,_netdev 0 0**    
+4 - Utilize o comando **df -h** para confirmar se o sistema de arquivos EFS está montado corretamente usando.  
 
-Abra o arquivo /etc/fstab em um editor.
-Para montar automaticamente um sistema de arquivos usando o NFS em vez do auxiliar de montagem do EFS, adicione a seguinte linha ao /etc/fstab arquivo.
-file_system_id.efs.aws-region.amazonaws.com:/ mount_point nfs4 nfsvers=4.1,rsize=1048576wsize=1048576,hard,timeo=600,retrans=2,noresvport,_netdev 0 0 
 
-Substitua file_system_id pelo ID do sistema de arquivos que você está montando.
+## Configurando o servidor Apache.
+1 - Utilize o comando **sudo yum update -y para atualizar o sistema**.  
+2 - Utilize o comando **sudo yum install httpd -y para instalar o apache**.  
+3 - Utilize o comando **sudo systemctl start httpd para iniciar o apache**.  
+4 - Utilize o comando **sudo systemctl enable httpd para habilitar o apache para iniciar automaticamente**.  
+5 - Utilize o comando **sudo systemctl status httpd para verificar o status do apache**.  
+6 - Configurações adicionais do apache podem ser feitas no arquivo /etc/httpd/conf/httpd.conf.  
+7 - O servidor poderá ser iniciado com o seguinte comando: **sudo systemctl start httpd**.  
+8 - O servidor poderá ser encerrado com o seguinte comando: **sudo systemctl stop httpd**.  
 
-Substitua aws-region Região da AWS pela que está no sistema de arquivos, como. us-east-1
-Substitua mount_point pelo ponto de montagem do sistema de arquivos.
-Confirme se o sistema de arquivos EFS está montado corretamente usando o comando df -h.
-
-Referência: Documentação do Amazon EFS
-
-Configurar o Apache.
-Executar o comando sudo yum update -y para atualizar o sistema.
-Executar o comando sudo yum install httpd -y para instalar o apache.
-Executar o comando sudo systemctl start httpd para iniciar o apache.
-Executar o comando sudo systemctl enable httpd para habilitar o apache para iniciar automaticamente.
-Executar o comando sudo systemctl status httpd para verificar o status do apache.
-Configurações adicionais do apache podem ser feitas no arquivo /etc/httpd/conf/httpd.conf.
-Parar o apache, executar o comando sudo systemctl stop httpd.
-Exemplo de user data para instalação do apache na criação da ec2.
 
 
