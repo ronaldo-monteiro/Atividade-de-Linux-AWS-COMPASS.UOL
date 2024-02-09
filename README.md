@@ -21,3 +21,17 @@ serviço OFFLINE;
 Preparar a execução automatizada do script a cada 5 minutos.  
 Fazer o versionamento da atividade;  
 Fazer a documentação explicando o processo de instalação do Linux.  
+
+## Resuloção do desafio: 
+
+1 - Criar uma chave pública de acesso e após este passo, anexar a chave a uma nova instância EC2 que criou.  
+2 - No console da AWS digite  "EC2" no campo de busca, e em "Pares de chaves".   
+4 - Neste passo excolha um nome para a chave e finalize clicando em  "Criar par de chaves".  
+5 - Um arquivo contendo a chave será gerado. Não perca este arquivo!!! Sua extesão é (xxx.pem)    
+6 - Execute a instancia na opção "Executar instâncias".  
+7 - Preste atenção neste ponto! As Tags são tudo!!! (Name, Project e CostCenter) Sem as TAGS seu projeto trava! 
+8 - Como pedido no projeto, encontre a imagem Amazon Linux 2 AMI, SSD Volume Type.  
+9 - Instancia pedida no projeto t3.small.
+10 - Lembra da chave que gerou?! Você vai precisar dela agora!
+12 - Utilize um SSD modelo gp2 com 16 GB dearmazenamento.
+13 - Ao final clique  em "Executar instância" (caso tudo tenha dado certo) finalizamos a primeira parte!
