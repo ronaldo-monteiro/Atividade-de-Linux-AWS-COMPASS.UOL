@@ -96,7 +96,7 @@ TCP personalizado	TCP	2049	0.0.0.0/0	NFS
 
 
 ## Configurar o script de validação.  
-Abra um editor de texto no seu servidor e crie um script Bash usando o comando nano check_service.sh.  
+Utilizando o editor nano e crie um script Bash usando o comando nano **script.sh** .  
 Adicione o seguinte conteúdo ao script.  
 
 ### !/bin/bash  
