@@ -45,11 +45,8 @@ Fazer a documentação explicando o processo de instalação do Linux.
 5 - Acessar a console, na pagina do serviço EC2, e clicar em "Segurança" > "Grupos de segurança" no menu lateral esquerdo.    
 
 Selecione o grupo de segurança da instância EC2 criada anteriormente.    
-
 Edite as regras de entrada "Editar regras de entrada".      
-
 Configure as seguintes regras conforme a tabela:  
-
 Tipo	Protocolo	Intervalo de portas	Origem	Descrição  
 
 SSH	 TCP	22       MEU IP  0.0.0.0/0 SSH  
@@ -86,7 +83,8 @@ TCP personalizado	TCP	2049	0.0.0.0/0	NFS
 4 - Utilize o comando **df -h** para confirmar se o sistema de arquivos EFS está montado corretamente usando.  
 
 
-## Configurando o servidor Apache.
+## Configurando o servidor Apache.  
+
 1 - Utilize o comando **sudo yum update -y para atualizar o sistema**.  
 2 - Utilize o comando **sudo yum install httpd -y para instalar o apache**.  
 3 - Utilize o comando **sudo systemctl start httpd para iniciar o apache**.  
