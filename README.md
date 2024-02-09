@@ -95,4 +95,28 @@ TCP personalizado	TCP	2049	0.0.0.0/0	NFS
 8 - O servidor poderá ser encerrado com o seguinte comando: **sudo systemctl stop httpd**.  
 
 
+## Configurar o script de validação.
+Abra um editor de texto no seu servidor e crie um script Bash usando o comando nano check_service.sh.
+Adicione o seguinte conteúdo ao script.
 
+#!/bin/bash
+# Script que verifica o status do serviço httpd e salva o resultado em um arquivo no diretório no qual foi criado com seu nome.
+
+
+#!/bin/bash
+
+SERVICE_NAME="httpd"
+EFS_MOUNT_PATH="/var/efs/ronaldo"
+
+CURRENT_DATE=$(date "+%Y-%m-%d")
+CURRENT_TIME=$(date "+%H:%M:%S")
+
+if systemctl is-active --quiet $SERVICE_NAME; then
+    STATUS="ONLINE"
+    MESSAGE="O serviço $SERVICE_NAME está online."
+    OUTPUT_FILE="$EFS_MOUNT_PATH/status_online.txt"
+else
+    STATUS="OFFLINE"
+    MESSAGE="O serviço $SERVICE_NAME está offline."
+    OUTPUT_FILE="$EFS_MOUNT_PATH/status_offline.txt"
+fi
