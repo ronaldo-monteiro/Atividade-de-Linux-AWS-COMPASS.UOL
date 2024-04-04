@@ -1,4 +1,5 @@
-# Atividade-de-Linux-AWS-COMPASS.UOL
+
+<h2 align="center"> Atividade-de-Linux-AWS-COMPASS.UOL</h2>
 
 ## Parte 1 - O desafio da atividade: 
 
