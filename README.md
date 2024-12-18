@@ -131,8 +131,9 @@ Criar o script usando o editor nano:
 Adicionar o conteúdo abaixo ao script:
 
 
-#!/bin/bash
-# Script que verifica o status do serviço httpd e salva o resultado em um arquivo.
+ #!/bin/bash
+
+### Script que verifica o status do serviço httpd e salva o resultado em um arquivo.
 
 ```
    SERVICE_NAME="httpd"
