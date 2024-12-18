@@ -74,5 +74,112 @@
 #### Criando o Ponto de Montagem na Instância EC2:
 1. Instalar o pacote necessário:
    ```bash
-   sudo yum install -y amazon-efs-utils
+   sudo yum install -y amazon-efs-utils```
+
+2. Criar um diretório local para o ponto de montagem.
+3. Obter as informações de DNS do ponto de montagem no console do EFS.
+4. Montar o sistema de arquivos usando:
+h
+
+  ```sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 ://```
+
+### Configurar a Montagem Automática:
+
+1. Editar o arquivo /etc/fstab  e adicionar a seguinte linha:
+
+
+  ```file_system_id.efs.aws-region.amazonaws.com:/ mount_point nfs4 nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport,_netdev 0 0```
+
+2. Verificar a montagem usando:
+
+
+  ```df -h```
+
+### Configurando o servidor Apache
+
+1. Atualizar o sistema:
+
+
+  ```sudo yum update -y```
+
+2. Instalar o Apache:
+
+
+  ```sudo yum install httpd -y```
+
+3. Iniciar o Apache:
+
+
+  ```sudo systemctl start httpd```
+
+4. Habilitar o Apache para iniciar automaticamente:
+
+
+  ```sudo systemctl enable httpd```
+
+5. Verificar o status:
+
+  ```sudo systemctl status httpd```
+
+
+### Configurando o script de validação
+
+Criar o script usando o editor nano:
+  
+  ```nano script.sh```
+
+Adicionar o conteúdo abaixo ao script:
+
+
+#!/bin/bash
+# Script que verifica o status do serviço httpd e salva o resultado em um arquivo.
+
+```
+   SERVICE_NAME="httpd"
+   EFS_MOUNT_PATH="/var/efs/ronaldo"
+
+   CURRENT_DATE=$(date "+%Y-%m-%d")
+   CURRENT_TIME=$(date "+%H:%M:%S")
+
+   if systemctl is-active --quiet $SERVICE_NAME; then
+   STATUS="ONLINE"
+   MESSAGE="O serviço $SERVICE_NAME está online."
+   OUTPUT_FILE="$EFS_MOUNT_PATH/status_online.txt"
+ else
+   STATUS="OFFLINE"
+   MESSAGE="O serviço $SERVICE_NAME está offline."
+   OUTPUT_FILE="$EFS_MOUNT_PATH/status_offline.txt"
+ if
+
+echo "$CURRENT_DATE $CURRENT_TIME - $STATUS - $MESSAGE" > $OUTPUT_FILE
+
+```
+
+Tornar o script executável:
+
+   ```chmod +x script.sh```
+
+Executar o script:
+
+
+   ```./script.sh```
+
+Configurar a execução automática com Cron
+
+1. Editar o cronjob:
+
+   ```crontab -e```
+
+Adicionar a seguinte linha:
+
+```
+  */5 * * * * /caminho/do/script/check_service.sh
+
+```
+
+Projeto Finalizado!
+
+
+
+
 
