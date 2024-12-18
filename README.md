@@ -4,6 +4,7 @@
 ## Parte 1 - O desafio da atividade: 
 
 ###  1 - Requisitos AWS:
+
 Gerar uma chave pública para acesso ao ambiente;    
 Criar 1 instância EC2 com o sistema operacional Amazon Linux 2 (Família t3.small, 16 GB SSD);    
 Gerar 1 elastic IP e anexar à instância EC2;  
