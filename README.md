@@ -73,8 +73,9 @@
 
 #### Criando o Ponto de Montagem na Instância EC2:
 1. Instalar o pacote necessário:
+   
    ```bash
-   sudo yum install -y amazon-efs-utils```
+   ```sudo yum install -y amazon-efs-utils```
 
 2. Criar um diretório local para o ponto de montagem.
 3. Obter as informações de DNS do ponto de montagem no console do EFS.
